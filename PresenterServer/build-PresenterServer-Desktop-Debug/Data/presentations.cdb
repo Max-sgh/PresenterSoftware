@@ -1,0 +1,4 @@
+#CDB-Header
+:dbname:
+:types:i:s:s:s:i
+:names:ID:user:folderName:name:numSlides
