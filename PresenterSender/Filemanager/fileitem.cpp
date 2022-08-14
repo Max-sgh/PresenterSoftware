@@ -11,7 +11,7 @@ FileItem::FileItem(QObject *parent)
 
 }
 /*
- * QMovie* movie = new QMovie("ressources/loading.gif");
+ * QMovie* movie = new QMovie(":icons/loading.gif");
  * QLabel* gif = new QLabel("");
  * gif->setMovie(movie);
  * movie->start();
@@ -31,16 +31,16 @@ QHBoxLayout *FileItem::getLayout()
     QLabel* icon = new QLabel("");
     switch (_status) {
         case Status::Loading:
-            icon->setPixmap(QPixmap("ressources/state-sync.jpg"));
+            icon->setPixmap(QPixmap(":icons/state-sync.jpg"));
             break;
         case Status::Error:
-            icon->setPixmap(QPixmap("ressources/state-error.jpg"));
+            icon->setPixmap(QPixmap(":icons/state-error.jpg"));
             break;
         case Status::Success:
-            icon->setPixmap(QPixmap("ressources/state-ok.jpg"));
+            icon->setPixmap(QPixmap(":icons/state-ok.jpg"));
             break;
         default:
-            icon->setPixmap(QPixmap("ressources/state-offline.jpg"));
+            icon->setPixmap(QPixmap(":icons/state-offline.jpg"));
             break;
     }
     ret->addWidget(icon);

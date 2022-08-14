@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/trash.png</file>
+        <file>icons/user.png</file>
+        <file>icons/presentation.png</file>
+        <file>icons/error.jpg</file>
+        <file>icons/loading.gif</file>
+        <file>icons/loading.jpg</file>
+        <file>icons/mimetype-pdf.jpg</file>
+        <file>icons/mimetype-presentation.jpg</file>
+        <file>icons/mimetype-unknown.jpg</file>
+        <file>icons/ok.jpg</file>
+        <file>icons/PDF.png</file>
+        <file>icons/spinner2.gif</file>
+        <file>icons/splashscreen.jpg</file>
+        <file>icons/state-error.jpg</file>
+        <file>icons/state-offline.jpg</file>
+        <file>icons/state-ok.jpg</file>
+        <file>icons/state-sync.jpg</file>
+    </qresource>
+</RCC>

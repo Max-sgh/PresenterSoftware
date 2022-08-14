@@ -22,6 +22,7 @@ public:
     bool connectToHost();
     bool checkServer();
     void login(std::string username, std::string password);
+    bool initializeServer();
     bool createRoom();
     Control* _c;
     std::string _id;

@@ -9,6 +9,8 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     connect(this, SIGNAL(accepted()), this, SLOT(buttonAccepted()));
     connect(this, SIGNAL(rejected()), this, SLOT(buttonRejected()));
     _rejected = false;
+    ui->label_4->setVisible(false);
+    _wait = ui->label_4;
 }
 
 void SettingsDialog::setTexts(QString serverName, QString serverIP) {

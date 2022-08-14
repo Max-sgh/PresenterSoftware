@@ -14,11 +14,12 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Network REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Multimedia REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS PrintSupport REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Pdf REQUIRED)
+find_package(Qt5 COMPONENTS Core REQUIRED)
+find_package(Qt5 COMPONENTS Network REQUIRED)
+find_package(Qt5 COMPONENTS Multimedia REQUIRED)
+find_package(Qt5 COMPONENTS PrintSupport REQUIRED)
+find_package(Qt5 COMPONENTS Pdf REQUIRED)
+find_package(Qt5 COMPONENTS Sql REQUIRED)
 
 find_package(Qt5Test REQUIRED)
 
@@ -48,6 +49,9 @@ set(PROJECT_FILES
     checkUserClass.h
     checkPresClass.h
     checkFileClass.h
+
+    dbmanager.h
+    dbmanager.cpp
 )
 
 add_executable(PresenterServer
@@ -55,23 +59,25 @@ add_executable(PresenterServer
   main.cpp
 )
 
-add_executable(testTcpServer
-    ${PROJECT_FILES}
-    testTcpServer.cpp
-)
+#add_executable(testTcpServer
+ #   ${PROJECT_FILES}
+ #   testTcpServer.cpp
+#)
 add_test(testTcpServer testTcpServer)
 
 ## Links for the real Application
-target_link_libraries(PresenterServer Qt${QT_VERSION_MAJOR}::Core)
-target_link_libraries(PresenterServer Qt${QT_VERSION_MAJOR}::Network)
-target_link_libraries(PresenterServer Qt${QT_VERSION_MAJOR}::Multimedia)
-target_link_libraries(PresenterServer Qt${QT_VERSION_MAJOR}::PrintSupport)
-target_link_libraries(PresenterServer Qt${QT_VERSION_MAJOR}::Pdf)
+target_link_libraries(PresenterServer Qt5::Core)
+target_link_libraries(PresenterServer Qt5::Network)
+target_link_libraries(PresenterServer Qt5::Multimedia)
+target_link_libraries(PresenterServer Qt5::PrintSupport)
+target_link_libraries(PresenterServer Qt5::Pdf)
+target_link_libraries(PresenterServer Qt5::Sql)
 
 ## Links for the Tests
-target_link_libraries(testTcpServer Qt${QT_VERSION_MAJOR}::Core)
-target_link_libraries(testTcpServer Qt${QT_VERSION_MAJOR}::Network)
-target_link_libraries(testTcpServer Qt${QT_VERSION_MAJOR}::Multimedia)
-target_link_libraries(testTcpServer Qt${QT_VERSION_MAJOR}::Test)
-target_link_libraries(testTcpServer Qt${QT_VERSION_MAJOR}::PrintSupport)
-target_link_libraries(testTcpServer Qt${QT_VERSION_MAJOR}::Pdf)
+#target_link_libraries(testTcpServer Qt5::Core)
+#target_link_libraries(testTcpServer Qt5::Network)
+#target_link_libraries(testTcpServer Qt5::Multimedia)
+#target_link_libraries(testTcpServer Qt5::Test)
+#target_link_libraries(testTcpServer Qt5::PrintSupport)
+#target_link_libraries(testTcpServer Qt5::Pdf)
+#target_link_libraries(testTcpServer Qt5::Sql)

@@ -27,8 +27,8 @@ void testTcpServer::testOpenDB() {
     TcpServer* s = new TcpServer();
     s->loadDatabases();
     QCOMPARE(QString::fromStdString(s->_clients->getFilename()), QString("Data/clients.cdb"));
-    QCOMPARE(QString::fromStdString(s->_user->getFilename()), QString("Data/users.cdb"));
-    QCOMPARE(QString::fromStdString(s->_presentations->getFilename()), QString("Data/presentations.cdb"));
+    //QCOMPARE(QString::fromStdString(s->_user->getFilename()), QString("Data/users.cdb"));
+    //QCOMPARE(QString::fromStdString(s->_presentations->getFilename()), QString("Data/presentations.cdb"));
 }
 
 void testTcpServer::testRoom(){

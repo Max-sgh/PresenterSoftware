@@ -3,6 +3,7 @@
 #include "control.h"
 #include "logindialog.h"
 #include "settingsdialog.h"
+#include "dashboard.h"
 
 #include <iostream>
 #include <QPixmap>
@@ -26,27 +27,42 @@ MainWindow::MainWindow(QWidget *parent)
 {
     _c = new Control(this);
 
+    QPixmap pix(":icons/splashscreen.jpg");
+    _c->_splash = new QSplashScreen(pix);
+    QFont font = _c->_splash->font();
+    font.setPixelSize(20);
+    font.setBold(true);
+    _c->_splash->setFont(font);
+    _c->_splash->showMessage("Initialisiere...", Qt::AlignRight | Qt::AlignBottom, Qt::white);
+
+    _c->_splash->show();
+
     // Einstellungen laden
+    _c->_splash->showMessage("Lade Einstellungen...", Qt::AlignRight | Qt::AlignBottom, Qt::white);
     if (!loadSettings()) {
         delete _c;
         exit(1);
     }
 
-    /*LoginDialog* ld = new LoginDialog(this);
+    ui->setupUi(this);
+    _c->_net = new Network(this, _c->_serverIP.toStdString(), 8083, _c);
+    _c->_net->initializeServer();
+
+    _c->_splash->hide();
+
+    LoginDialog* ld = new LoginDialog(this);
     ld->exec();
     if (ld->_exit) {
         delete _c;
         exit(0);
     }
+    _c->_splash->show();
     //std::cout << ld->_username.toStdString() << " " << ld->_password.toStdString() << std::endl;
     _username = ld->_username.toStdString();
-    _password = ld->_password.toStdString();*/
+    _password = ld->_password.toStdString();
 
     _username = "lange.m";
     _password = "Rsu3sc123";
-
-    ui->setupUi(this);
-    _c->_net = new Network(this, _c->_serverIP.toStdString(), 8083, _c);
     _c->_net->login(_username, _password);
 
     _c->_ph = new PresentationHandler(new QObject, _c);
@@ -63,12 +79,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(_c->_net, &Network::isAdmin, _c->_hw, &HomeWindow::setAdmin);
     connect(_c->_net, &Network::setRemote, _c->_hw, &HomeWindow::setRemote);
 
-    QPixmap pix("ressources/splashscreen.jpg");
-    _c->_splash = new QSplashScreen(pix);
-    _c->_splash->show();
-
     //_c->_hw->show();
     // _c->_pres->showNormal();
+    /*Dashboard* db = new Dashboard(this);
+    db->showNormal();*/
 }
 
 bool MainWindow::loadSettings() {

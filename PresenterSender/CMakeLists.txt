@@ -75,6 +75,8 @@ set(PROJECT_FILES
         Admin/checksysdialog.ui
 
         Admin/checkitem.h
+        dashboard.h dashboard.cpp dashboard.ui
+        ui/sidewidget.h ui/sidewidget.cpp
 )
 
 set(PRESENTATION_SOURCES
@@ -99,11 +101,33 @@ set(PRESENTATION_SOURCES
         Presentation/stroke.cpp
 )
 
+IF(WIN32)
 add_executable(PresenterSender
+    WIN32
     ${PROJECT_FILES}
     ${PRESENTATION_SOURCES}
     main.cpp
 )
+ELSE()
+add_executable(PresenterSender
+    icons.qrc
+    ${PROJECT_FILES}
+    ${PRESENTATION_SOURCES}
+    main.cpp
+)
+ENDIF(WIN32)
+
+IF(APPLE)
+add_executable(PresenterSender
+    icons.qrc
+    MACOSX_BUNDLE
+    ${PROJECT_FILES}
+    ${PRESENTATION_SOURCES}
+    main.cpp)
+ENDIF(APPLE)
+
+
+
 
 #if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
  #   qt_add_executable(PresenterSender

@@ -1,4 +1,5 @@
 ﻿#include "control.h"
+#include "settingsdialog.h"
 
 #include <iostream>
 #include <map>
@@ -34,11 +35,50 @@ bool Network::checkServer() {
     return connected;
 }
 
-void Network::login(std::string username, std::string password){
+bool Network::initializeServer() {
+    _c->_splash->showMessage("Verbinde zum Server...", Qt::AlignRight | Qt::AlignBottom, Qt::white);
     if (!connectToHost()) {
         std::cout << "Server Error!" << std::endl;
-        exit(1); 
+        //_c->_splash->hide();
+        _c->_splash->clearMessage();
+        QMessageBox::warning(new QWidget(), "Keine Verbindung zum Server möglich!", "Es konnte keine Verbindung mit dem Server hergestellt werden.\
+                             Prüfen Sie die Einstellungen und die Netzwerkverbindung des Geräts und versuchen Sie es später erneut. Sollte das Problem\
+weiterhin auftreten kontaktieren Sie den zuständigen Administrator");
+        //exit(1);
+        SettingsDialog* dlg = new SettingsDialog();
+        dlg->setTexts(_c->_serverName, _c->_serverIP);
+        dlg->exec();
+        //_c->_splash->show();
+        _c->_splash->showMessage("Überprüfe Eingaben...", Qt::AlignRight | Qt::AlignBottom, Qt::white);
+        dlg->hide();
+        // dlg->_wait->setVisible(true);
+        // dlg->show();
+        if (dlg->_rejected) {
+            //exit(0);
+            delete dlg;
+            exit(0);
+        }
+        QTcpSocket* socket = new QTcpSocket();
+        socket->connectToHost(dlg->_serverIP, 8083);
+        if (socket->waitForConnected(3000)) {
+            QMessageBox::information(new QWidget(), "Einstellungen korrekt!", "Die Einstellungen wurde erfolgreich überprüft und werden nun gespeichert.",
+                                     QMessageBox::Ok);
+            _c->saveSettings("settings.xml", dlg->_serverName, dlg->_serverIP);
+            _hostname = dlg->_serverIP.toStdString();
+        } else {
+            QMessageBox::critical(new QWidget(), "Einstellungen nicht korrekt!", "Die vorgenommen Änderungen sind nicht korrekt, es konnte mit diesen \
+                                                                                 keine Verbindungen zum Server hergestellt werden. Bitte überprüfen Sie \
+                                                                                 ihre Eingaben und versuchen Sie es erneut.", QMessageBox::Ok);
+            delete dlg;
+            exit(0);
+        }
+
     }
+    return true;
+}
+
+void Network::login(std::string username, std::string password){
+    _c->_splash->showMessage("Logge ein...", Qt::AlignRight | Qt::AlignBottom, Qt::white);
     _username = username;
     _password = password;
 
@@ -170,6 +210,7 @@ void Network::readSocket() {
             std::cout << "Login successfull" << std::endl;
             std::cout << arg1.toStdString() << std::endl;;
             if (arg1 == "true") {
+                std::cout << "admin" << std::endl;
                 _isAdmin = true;
                 emit isAdmin();
             }
@@ -235,7 +276,7 @@ void Network::readSocket() {
             std::cout << "got Image " << arg1.toStdString() << " " << buffer.length() << std::endl;
             QPixmap* pix = new QPixmap();
             pix->loadFromData(buffer);
-            pix->save(arg2 + ".jpg");
+            //pix->save(arg2 + ".jpg");
             if (std::find(_newNames.begin(), _newNames.end(), arg1) == _newNames.end()) {
                 _newPixes.push_back(pix);
                 _newNames.push_back(arg1);

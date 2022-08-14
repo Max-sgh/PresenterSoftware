@@ -76,6 +76,7 @@ void MainWindow::restoreSlide()
 
 MainWindow::~MainWindow()
 {
+    _net->sendMessage("deleteClient", _net->_roomID, QString::number(_net->_clientID), "");
     if (_pres != nullptr)
         delete _pres;
     delete _net;

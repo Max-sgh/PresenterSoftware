@@ -62,23 +62,23 @@ void CheckSysDialog::createList(QList<CheckItem*> list) {
         QSpacerItem* spacer = new QSpacerItem(10,10, QSizePolicy::Expanding, QSizePolicy::Minimum);
         QLabel* status = new QLabel("status");
 
-        /*QMovie* movie = new QMovie("ressources/spinner.gif");
+        /*QMovie* movie = new QMovie(":icons/spinner.gif");
         status->setMovie(movie);
         movie->start();*/
-        // status->setPixmap(QPixmap("ressources/error.jpg").scaled(40,40));
+        // status->setPixmap(QPixmap(":icons/error.jpg").scaled(40,40));
         switch (list[i]->_status){
             case CheckItem::Loading:
-                //QMovie* movie = new QMovie("ressources/spinner.gif");
-                status->setMovie(new QMovie("ressources/spinner2.gif"));
+                //QMovie* movie = new QMovie(":icons/spinner.gif");
+                status->setMovie(new QMovie(":icons/spinner2.gif"));
                 // movie->start();
                 status->movie()->start();
                 status->movie()->setScaledSize(QSize(30,30));
                 break;
             case CheckItem::Error:
-                status->setPixmap(QPixmap("ressources/error.jpg").scaled(30,30));
+                status->setPixmap(QPixmap(":icons/error.jpg").scaled(30,30));
                 break;
             case CheckItem::Success:
-                status->setPixmap(QPixmap("ressources/ok.jpg").scaled(30,30));
+                status->setPixmap(QPixmap(":icons/ok.jpg").scaled(30,30));
                 break;
             default:
                 break;

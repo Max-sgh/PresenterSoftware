@@ -2,3 +2,5 @@
 :dbname:
 :types:i:s:s:s:s:s
 :names:ID:username:firstName:lastName:password:admin
+:row:1:test:Test1:User:123456:false
+:row:2:lange.m:Maximilian:Lange:Rsu3sc123:true

@@ -24,7 +24,7 @@ Network::Network(QObject *parent) : QObject(parent)
         connect(this->_server, SIGNAL(newConnection()), this, SLOT(newConnection()));
     }*/
     _socket = new QTcpSocket();
-    _socket->connectToHost("192.168.178.3", 8083);
+    _socket->connectToHost("192.168.178.20", 8083);
     if (_socket->waitForConnected(3000)) {
         connect(_socket, &QTcpSocket::readyRead, this, &Network::readSocket);
         sendMessage("registerClient", this->name, this->IP, "");

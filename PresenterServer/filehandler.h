@@ -9,16 +9,17 @@
 #include "Database/CDB.h"
 #include "Database/CDBFileHandler.h"
 #include "Database/CDBRow.h"
+#include "dbmanager.h"
 
 class FileHandler : public QObject
 {
     Q_OBJECT
 public:
     explicit FileHandler(QObject *parent = nullptr);
-    bool convertFile(Room* r, QString file, CDB* files, CDB* presentations);
-    bool convertPDFWithEntry(Room* r, QString file, CDB* files, CDB* presentations);
-    bool convertPDF(QString file, int* i, CDB* files);
-    bool deleteFile(QString dirname, CDB* files, CDB* presentations);
+    bool convertFile(Room* r, QString file, DbManager* dbm);
+    bool convertPDFWithEntry(Room* r, QString file, DbManager* dbm);
+    bool convertPDF(QString file, int* i, DbManager* dbm);
+    bool deleteFile(QString dirname, DbManager* dbm);
     QImage renderSlide(QImage img, QString strokes);
     void exportToPDF(QVector<QImage> imgs, QString filename);
 

@@ -6,6 +6,11 @@
 #include <QTcpSocket>
 #include <QMap>
 
+#include <QSqlDatabase>
+#include <QSqlDriver>
+#include <QSqlError>
+#include <QSqlQuery>
+
 #include "room.h"
 #include "Database/CDB.h"
 #include "Database/CDBFileHandler.h"
@@ -16,10 +21,12 @@
 #include "MobileServer/mobileserver.h"
 #include "slidemanager.h"
 #include "checksystem.h"
+#include "dbmanager.h"
 
 class MobileServer;
 class SlideManager;
 class CheckSystem;
+class DbManager;
 
 class TcpServer : public QObject
 {
@@ -47,17 +54,20 @@ public slots:
 private:
     friend class testTcpServer;
 
+    //QSqlDatabase* _db;
+
     QTcpServer *_server;
     std::vector<Room*> _rooms;
-    CDB* _user;
-    CDB* _presentations;
-    CDB* _clients;
-    CDB* _files;
+    //CDB* _user;
+    //CDB* _presentations;
+    // CDB* _clients;
+    //CDB* _files;
     QMap<std::string, std::string> _currentFiles;
     Strokehandler* _sh;
     FileHandler* _fh;
     QVector<Client*> _activeClients;
     CheckSystem* _checkSys;
+    DbManager* _dbm;
 
     // Networkoperations
     void readSocket();

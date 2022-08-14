@@ -38,13 +38,13 @@ void FileManager::createFileList()
         QStringList presMime = { "ppt", "pptx", "odp" };
         QPixmap* img;
         if (presMime.contains(mimetype)) {
-            img = new QPixmap("ressources/mimetype-presentation.jpg");
+            img = new QPixmap(":icons/mimetype-presentation.jpg");
         }
         else if (mimetype == "pdf") {
-            img = new QPixmap("ressources/mimetype-pdf.jpg");
+            img = new QPixmap(":icons/mimetype-pdf.jpg");
         }
         else {
-            img = new QPixmap("ressources/mimetype-unknown.jpg");
+            img = new QPixmap(":icons/mimetype-unknown.jpg");
         }
         QLabel* imgShow = new QLabel("");
         imgShow->setPixmap(img->scaled(32,32, Qt::KeepAspectRatio));
@@ -54,9 +54,9 @@ void FileManager::createFileList()
         QSpacerItem* spacer = new QSpacerItem(40,20, QSizePolicy::Expanding, QSizePolicy::Minimum);
         /*QPushButton* p1 = new QPushButton("B");
         p1->setObjectName(QString::number(i) + "-B");*/
-        QPixmap trash("ressources/trash.png");
+        QPixmap trash(":icons/trash.png");
         QIcon i1(trash);
-        QPixmap pdf("ressources/PDF.png");
+        QPixmap pdf(":icons/PDF.png");
         QIcon i2(pdf);
 
         QPushButton* p2 = new QPushButton("");

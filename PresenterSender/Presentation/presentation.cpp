@@ -25,7 +25,7 @@ void Presentation::gotAllPreviews() {
 
 void Presentation::preparationSuccessfully() {
     ui->statusbar->showMessage("Getting Data from Server.");
-    QMovie* movie = new QMovie("ressources/spinner2.gif");
+    QMovie* movie = new QMovie(":icons/spinner2.gif");
     movie->start();
     movie->setScaledSize(QSize(40,40));
     ui->label->setMovie(movie);

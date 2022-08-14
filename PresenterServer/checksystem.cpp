@@ -22,7 +22,7 @@ CheckSystem::~CheckSystem()
 
 QString CheckSystem::checkUserDB()
 {
-    QString filename = QString::fromStdString(_server->_user->getFilename());
+    /*QString filename = QString::fromStdString(_server->_user->getFilename());
     QList<CheckUser*> users;
     QFile f(filename);
     int linenum = 0;
@@ -72,13 +72,13 @@ QString CheckSystem::checkUserDB()
         }
     } else {
         return "Error - Opening Databasefile.";
-    }
+    }*/
     return "success";
 }
 
 QString CheckSystem::checkPresDB()
 {
-    QString filename = QString::fromStdString(_server->_presentations->getFilename());
+    /*QString filename = QString::fromStdString(_server->_presentations->getFilename());
     QList<CheckPres*> pres;
     QFile f(filename);
     int linenum = 0;
@@ -137,13 +137,13 @@ QString CheckSystem::checkPresDB()
         }
     } else {
         return "Error - Opening Databasefile.";
-    }
+    }*/
     return "success";
 }
 
 QString CheckSystem::checkFilesDB()
 {
-    QString filename = QString::fromStdString(_server->_files->getFilename());
+    /*QString filename = QString::fromStdString(_server->_files->getFilename());
     QList<CheckFile*> files;
     QFile f(filename);
     int linenum = 0;
@@ -194,7 +194,7 @@ QString CheckSystem::checkFilesDB()
         }
     } else {
         return "Error - Opening Databasefile.";
-    }
+    }*/
     return "success";
 
 }
